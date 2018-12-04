@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run harman-docker-project npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "harman-docker-project"
+  env: "HarmanDockerProject-env"
+  bucket_name: "elasticbeanstalk-us-east-2-243330637950"
+  bucket_path: "harman-docker-project"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
